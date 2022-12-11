@@ -13,7 +13,7 @@ class Movies extends Component {
     render() { 
         return ( 
             <ul className="movies">
-                {this.state.movies.map((movie) => (
+                {this.props.movies.map((movie) => (
                     <li className="movies__item" key={movie.imdbID}>
                         <MovieItem {...movie} />
                     </li>

@@ -6,11 +6,11 @@ import {connect} from "react-redux";
 const mapDispatchToProps = (dispatch) => ({
     favoriteMovie : (id) => dispatch(favoriteMovie(id))
 })
-const mapStateToProps = (state) => {
-    return {
-        favorite: state.favorite
-    }
-}
+// const mapStateToProps = (state) => {
+//     return {
+//         favorite: state.favorite
+//     }
+// }
 class MovieItem extends Component {
     render() {
         const {id, title, year, poster } = this.props;
@@ -26,4 +26,4 @@ class MovieItem extends Component {
     }
 }
  
-export default connect(mapStateToProps,mapDispatchToProps)(MovieItem);
+export default connect(null,mapDispatchToProps)(MovieItem);
