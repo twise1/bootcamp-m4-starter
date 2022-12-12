@@ -22,6 +22,14 @@ export function zaprosFilma(text){
         .then((data) => {
           dispatch(searchMovie(data.Search));
         })
-        .catch((err) => console.log(err));
+         .catch((err) => console.log(err));
     }
+}
+export function removeFromFavorite(id){
+    return{
+        type: "REMOVE_FROM_FAVORITE",
+        payload:{
+            id:id
+        }
+    };
 }

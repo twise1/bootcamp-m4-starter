@@ -33,6 +33,13 @@ function reducer(state=initialState,action){
             movies: action.payload.movies   
         };
     }
+    if(action.type === "REMOVE_FROM_FAVORITE"){
+        let newFavorite = state.favorite.filter((item) => item.imdbID !== action.payload.id);
+        return{
+            ...state,
+            favorite: newFavorite
+        };
+    }
     return state;
 }
 export default reducer;

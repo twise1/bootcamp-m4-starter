@@ -13,7 +13,16 @@
     margin-bottom: 24px;
 }
 
-.favorites__list {
+.remove-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+.remove-favorite{
+    max-width: 30px;
+}
+.favorites__list { 
     margin-bottom: 24px;
 }
 
