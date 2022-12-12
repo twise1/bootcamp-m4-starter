@@ -15,12 +15,13 @@ export function searchMovie(movies){
     };
 };
 export function zaprosFilma(text){
-    const apiKey="248fe4cd";
     return function(dispatch){
+        const apiKey="248fe4cd";
     fetch(`http://www.omdbapi.com/?s=${text}&apikey=${apiKey}`)
         .then((res) => res.json())
         .then((data) => {
           dispatch(searchMovie(data.Search));
-        });
+        })
+        .catch((err) => console.log(err));
     }
 }

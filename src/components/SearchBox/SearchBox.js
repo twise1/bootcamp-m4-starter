@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 class SearchBox extends Component {
     state = {
         searchLine: ''
-    }
+    };
     searchLineChangeHandler = (e) => {
         this.setState({ searchLine: e.target.value });
     }
