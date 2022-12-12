@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import './Favorites.css';
 import {connect} from "react-redux";
-import { removeFromFavorite } from '../../redux/action';
+import { removeFromFavorite , saveZapros} from '../../redux/action';
 
 const mapStateToProps = (state) => {
     console.log(state.favorite)
     return {
-        favorite: state.favorite
+        favorite: state.favorite,
+        massivOfFavoriteID: state.massivOfFavoriteID,
     };
 }
 const mapDispatchToProps = (dispatch) => ({
-    removeFromFavorite: (id) => dispatch(removeFromFavorite(id))
-})
+    removeFromFavorite: (id) => dispatch(removeFromFavorite(id)),
+    saveZapros: (nameOfSpis,massivOfFavoriteID) => dispatch(saveZapros(nameOfSpis,massivOfFavoriteID)),    
+});
 
 class Favorites extends Component {
     state = {
@@ -28,6 +30,15 @@ class Favorites extends Component {
             s2.style.backgroundColor="gray";
         }
     }
+    toMakeMassiv = () => {
+        let massivOfFavoriteID = this.props.favorite.map((item) => {
+            return item.imdbID;
+        })
+        return massivOfFavoriteID;
+    }
+    ButtonClick = (event) => {
+        this.props.saveZapros(this.state.nameOfSpis,this.toMakeMassiv());
+    }
     render() { 
         return (
             <div className="favorites">
@@ -38,7 +49,7 @@ class Favorites extends Component {
                            {item.Title} ({item.Year}) </li> <button className='remove-favorite' onClick={() => this.props.removeFromFavorite(item.imdbID)}>X</button> </div>;
                     })}
                 </ul>
-                <button type="button" className="favorites__save" disabled={!this.props.favorite.length}>Сохранить список</button>
+                <button type="button" className="favorites__save" onClick={this.ButtonClick}>Сохранить список</button>
             </div>
         );
     }

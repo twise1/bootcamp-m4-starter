@@ -32,4 +32,32 @@ export function removeFromFavorite(id){
             id:id
         }
     };
-} 
+}
+export function createMassivOfID(favoriteID){
+    return{
+        type:"SAVE_FAVORITE",
+        payload:{
+            favoriteID: favoriteID
+        }
+    };
+}
+export function saveZapros(nameOfSpis, massivOfFavoriteID) {
+    return function (dispatch) {
+        let list = {
+            nameOfSpis: nameOfSpis,
+            movies: massivOfFavoriteID,
+        };
+        fetch("https://acb-api.algoritmika.org/api/movies/list/", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify(list),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            dispatch(createMassivOfID(data.id));
+        })
+        .catch((err) => console.log(err));
+    };
+}

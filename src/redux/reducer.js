@@ -15,7 +15,8 @@ const initialState = {
 
     }],
     title: "",
-    favorite: [],п
+    favorite: [],
+    favoriteID: "",
 };
 function reducer(state=initialState,action){
     if(action.type === "FAVORITE_MOVIE") {
@@ -40,6 +41,12 @@ function reducer(state=initialState,action){
             favorite: newFavorite
         };
     }
+    if(action.type==="SAVE_FAVORITE"){
+        return{
+            ...state,
+            favoriteID:action.payload.favoriteID
+        }
+    };
     return state;
 }
 export default reducer;
