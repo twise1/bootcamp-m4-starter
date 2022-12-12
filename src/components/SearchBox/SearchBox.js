@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './SearchBox.css';
-
+import {zaprosFilma} from "../../redux/action";
+import {connect} from "react-redux";
 class SearchBox extends Component {
     state = {
         searchLine: ''
@@ -10,6 +11,7 @@ class SearchBox extends Component {
     }
     searchBoxSubmitHandler = (e) => {
         e.preventDefault();
+        this.props.dispatch(zaprosFilma(this.state.searchLine))
     }
     render() {
         const { searchLine } = this.state;
@@ -40,4 +42,4 @@ class SearchBox extends Component {
     }
 }
  
-export default SearchBox;
+export default connect(null)(SearchBox);

@@ -15,15 +15,22 @@ const initialState = {
 
     }],
     title: "",
-    favorite: []
+    favorite: [],
 };
 function reducer(state=initialState,action){
     if(action.type === "FAVORITE_MOVIE") {
         let movies = state.movies.find((item) => item.imdbID === action.payload.id);
+        console.log(movies);
         let favorite = [...state.favorite,movies];
         return{
             ...state,
             favorite,
+        };
+    }
+    if(action.type === "SEARCH_MOVIE"){
+        return{
+            ...state,
+            movies: action.payload.movies   
         };
     }
     return state;

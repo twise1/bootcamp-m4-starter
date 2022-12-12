@@ -13,13 +13,13 @@ const mapStateToProps = (state) => {
 }
 class MovieItem extends Component {
     render() {
-        const {id, title, year, poster } = this.props;
+        const {imdbID, title, year, poster } = this.props;
         return (
             <article className="movie-item">
                 <img className="movie-item__poster" src={poster} alt={title} />
                 <div className="movie-item__info">
                     <h3 className="movie-item__title">{title}&nbsp;({year})</h3>
-                    <button type="button" className="movie-item__add-button" onClick={() => this.props.favoriteMovie(id)}>Добавить в список</button>
+                    <button type="button" className="movie-item__add-button" onClick={() => this.props.favoriteMovie(imdbID)}>Добавить в список</button>
                 </div>
             </article>
         );
