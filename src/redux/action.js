@@ -32,4 +32,4 @@ export function removeFromFavorite(id){
             id:id
         }
     };
-}
+} 

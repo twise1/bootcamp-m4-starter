@@ -15,7 +15,7 @@ const initialState = {
 
     }],
     title: "",
-    favorite: [],
+    favorite: [],п
 };
 function reducer(state=initialState,action){
     if(action.type === "FAVORITE_MOVIE") {
