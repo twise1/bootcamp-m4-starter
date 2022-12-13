@@ -44,7 +44,7 @@ export function createMassivOfID(favoriteID){
 export function saveZapros(nameOfSpis, massivOfFavoriteID) {
     return function (dispatch) {
         let list = {
-            nameOfSpis: nameOfSpis,
+            title: nameOfSpis,
             movies: massivOfFavoriteID,
         };
         fetch("https://acb-api.algoritmika.org/api/movies/list/", {
@@ -57,6 +57,7 @@ export function saveZapros(nameOfSpis, massivOfFavoriteID) {
         .then((res) => res.json())
         .then((data) => {
             dispatch(createMassivOfID(data.id));
+            console.log(list);
         })
         .catch((err) => console.log(err));
     };

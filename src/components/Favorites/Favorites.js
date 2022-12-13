@@ -38,6 +38,7 @@ class Favorites extends Component {
     }
     ButtonClick = (event) => {
         this.props.saveZapros(this.state.nameOfSpis,this.toMakeMassiv());
+        console.log(this.state.massivOfFavoriteID);
     }
     render() { 
         return (
