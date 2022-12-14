@@ -41,11 +41,12 @@ export function createMassivOfID(favoriteID){
         }
     };
 }
-export function saveZapros(nameOfSpis, massivOfFavoriteID) {
+
+export function saveZapros(nameOfSpis, favorite) {
     return function (dispatch) {
         let list = {
             title: nameOfSpis,
-            movies: massivOfFavoriteID,
+            movies: favorite,
         };
         fetch("https://acb-api.algoritmika.org/api/movies/list/", {
             method: "POST",
@@ -56,9 +57,18 @@ export function saveZapros(nameOfSpis, massivOfFavoriteID) {
         })
         .then((res) => res.json())
         .then((data) => {
+            console.log(data.id);
             dispatch(createMassivOfID(data.id));
-            console.log(list);
         })
         .catch((err) => console.log(err));
     };
+}
+
+export function makeList(data) {
+    return {
+        type:"MAKE_LIST",
+        payload:{
+            data: data
+        }
+    }
 }
