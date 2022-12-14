@@ -17,6 +17,7 @@ const initialState = {
     title: "",
     favorite: [],
     favoriteID: "",
+    listPage: []
 };
 function reducer(state=initialState,action){
     if(action.type === "FAVORITE_MOVIE") {
@@ -44,9 +45,15 @@ function reducer(state=initialState,action){
     if(action.type==="SAVE_FAVORITE"){
         return{
             ...state,
-            favoriteID:action.payload.favoriteID
+            favoriteID: action.payload.favoriteID
         }
     };
+    if(action.type === "MAKE_LIST") {
+        return{
+            ...state,
+            listPage: action.payload.data
+        }
+    }
     return state;
 }
 export default reducer;
