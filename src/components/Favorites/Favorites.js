@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Favorites.css';
 import {connect} from "react-redux";
 import { removeFromFavorite , saveZapros} from '../../redux/action';
 
 const mapStateToProps = (state) => {
-    console.log(state.favorite)
     return {
         favorite: state.favorite,
-        massivOfFavoriteID: state.massivOfFavoriteID,
+        favoriteID: state.favoriteID,
     };
 }
 const mapDispatchToProps = (dispatch) => ({
@@ -31,14 +31,20 @@ class Favorites extends Component {
         }
     }
     toMakeMassiv = () => {
-        let massivOfFavoriteID = this.props.favorite.map((item) => {
-            return item.imdbID;
-        })
-        return massivOfFavoriteID;
+        // let massivOfFavoriteID = this.props.favorite.map((item) => {
+        //     return item.imdbID;
+        // })
+        return this.state.favorite;
     }
     ButtonClick = (event) => {
-        this.props.saveZapros(this.state.nameOfSpis,this.toMakeMassiv());
-        console.log(this.state.massivOfFavoriteID);
+        this.props.saveZapros(this.state.nameOfSpis, this.props.favorite);
+        
+        document.querySelector('.favorites__save').textContent = "Идет запрос";
+        setTimeout(() => {  
+            document.querySelector('.favorites__save').remove(); 
+            document.querySelector('.ssilka').style.display = "block";}, 3000);
+        
+        console.log(this.props.favoriteID)
     }
     render() { 
         return (
@@ -51,6 +57,7 @@ class Favorites extends Component {
                     })}
                 </ul>
                 <button type="button" className="favorites__save" onClick={this.ButtonClick}>Сохранить список</button>
+                <Link className="ssilka" to={`/list/${this.props.favoriteID}`}>Перейти к списку</Link>
             </div>
         );
     }

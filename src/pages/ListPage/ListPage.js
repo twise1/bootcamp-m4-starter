@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
 import './ListPage.css';
+import {connect} from "react-redux";
+import { makeList } from '../../redux/action';
+
+const mapStateToProps = (state) => {
+    return {
+        listPage: state.listPage,
+        favoriteID: state.favoriteID,
+    };
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    makeList: (data) => dispatch(makeList(data)),   
+});
 
 class ListPage extends Component {
     state = {
@@ -8,20 +21,24 @@ class ListPage extends Component {
         ]
     }
     componentDidMount() {
-        const id = this.props.match.params;
-        console.log(id);
-        // TODO: запрос к сервер на получение списка
-        // TODO: запросы к серверу по всем imdbID
+        fetch(`https://acb-api.algoritmika.org/api/movies/list/${this.props.favoriteID}`)
+        .then(res => res.json())
+        .then(data => {
+          this.props.makeList(data.movies);
+          console.log(this.props.listPage);
+        });
     }
+
     render() { 
+        if(this.props.listPage.length === 0) return true;    
         return (
             <div className="list-page">
                 <h1 className="list-page__title">Мой список</h1>
                 <ul>
-                    {this.state.movies.map((item) => {
+                    {this.props.listPage.map((item) => {
                         return (
                             <li key={item.imdbID}>
-                                <a href="https://www.imdb.com/title/tt0068646/" target="_blank">{item.title} ({item.year})</a>
+                                <a href={`https://www.imdb.com/title/${item.imdbID}/`} target="_blank">{item.Title} ({item.Year})</a>
                             </li>
                         );
                     })}
@@ -31,4 +48,4 @@ class ListPage extends Component {
     }
 }
  
-export default ListPage;
+export default connect(mapStateToProps, mapDispatchToProps)(ListPage);
