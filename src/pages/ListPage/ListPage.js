@@ -18,13 +18,15 @@ class ListPage extends Component {
     state = {
         movies: [
             { title: 'The Godfather', year: 1972, imdbID: 'tt0068646' }
-        ]
+        ],
+        title: ""
     }
     componentDidMount() {
         fetch(`https://acb-api.algoritmika.org/api/movies/list/${this.props.favoriteID}`)
         .then(res => res.json())
         .then(data => {
           this.props.makeList(data.movies);
+          this.setState({title: data.title});
           console.log(this.props.listPage);
         });
     }
@@ -33,7 +35,7 @@ class ListPage extends Component {
         if(this.props.listPage.length === 0) return true;    
         return (
             <div className="list-page">
-                <h1 className="list-page__title">Мой список</h1>
+                <h1 className="list-page__title">{this.state.title}</h1>
                 <ul>
                     {this.props.listPage.map((item) => {
                         return (
