@@ -49,7 +49,7 @@ class Favorites extends Component {
     render() { 
         return (
             <div className="favorites">
-                <input value={this.state.nameOfSpis} className="favorites__name" onChange={this.ChangeInput} placeholder="Введите название списка" disabled={!this.props.favorite.length} required/>
+                <input value={this.state.nameOfSpis} className="favorites__name" onChange={this.ChangeInput} placeholder="Введите название списка" required/>
                 <ul className="favorites__list">
                     {this.props.favorite.map((item) => {
                         return <div className='remove-div'> <li key={item.imdbID}>
